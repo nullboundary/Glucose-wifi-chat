@@ -1,0 +1,287 @@
+/*
+Copyright (c) 2006 Noah M. Shibley  All right reserved.
+
+This file is part of Glucose.
+
+    Glucose is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Glucose is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Glucose.  If not, see <http://www.gnu.org/licenses/>.
+
+*/
+
+body
+{
+
+	/**background : #333333;**/
+	   background: #000000;
+
+}
+
+h1
+{
+	color: #663399;
+	font: 15px arial;
+}
+
+input
+{
+	position: relative;
+	top: 4px;
+	left: 4px;
+
+}
+
+div#title
+{
+	position: absolute;
+	top: 15px;
+	left: 560px;
+
+
+}
+
+div#user
+{
+	display: none;
+	position: absolute;
+	top: 35px;
+	left: 500px;
+
+
+}
+
+div#ip
+{
+	display: none;
+	position: absolute;
+	top: 25px;
+	left: 500px;
+
+
+}
+
+div#send
+{
+	float:left;
+        position:relative;
+        width: 36px;
+        height: 25px;
+	left: 450px;
+	top: -20px;
+        padding: 0px;
+        margin-bottom: 3px;
+        display: inline;
+        background: url("images/send_button.png") left no-repeat;	
+
+
+}
+
+div#userList
+{
+        float:left;
+        position:absolute;
+        left:15px;
+        top:55px;
+        /**background : #333333; **/
+	background : #000000;
+        color : #000000;
+        padding : 4px;
+        width : 200px;
+        height : 222px;
+        overflow : auto;
+	
+}
+
+li
+{
+	list-style: none;
+	width: auto;
+}
+
+div#output
+{
+
+        border : solid 1px #000000;
+	position: absolute;
+        background : #f8f8fa;
+        color : #000000;
+        padding : 4px;
+        top:55px;
+	left: 230px;
+        width : 502px;
+        height : 200px;
+        overflow : auto;
+}
+
+div#inputBar
+{
+
+	position: absolute;
+        background : #f8f8fa;
+        color : #000000;
+        padding : 0px;
+        top:275px;
+        left: 230px;
+        width : 502px;
+        height : 30px;
+
+}
+
+div#itemDiv
+{
+	position: relative;
+	margin: 0px;
+        padding: 0px;
+	left: 0px;
+	width: 100%;
+	height: 27px;
+        background: url("images/userList_center2.png") left repeat-x;	
+
+}
+
+
+div#name
+{
+        float:left;
+        position:relative;
+        width: 100%;
+        height: 15px;
+        padding: 0px;
+        margin-bottom: 0px;
+      	background: url("images/header_center.png") left repeat-x; 
+}
+
+div#msg
+{
+        float:left;
+	position: relative;
+        width: 100%;
+        height: auto;
+        margin-bottom: 0px;
+        padding: 0px;
+	background: #cccccc;
+
+}
+
+div#msgBottom
+{
+
+	float:left;
+	position: relative;
+        width: 100%;
+        height: 3px;
+        margin-bottom: 3px;
+        padding: 0px;
+        background: url("images/message_center.png") bottom repeat-x;
+
+
+
+}
+
+
+div#nameLeft
+{
+	float:left;
+	position:relative;
+        width: 10px;
+        height: auto;
+        padding: 0px;
+        margin-bottom: 3px;
+        display: inline;
+	background: url("images/header_left.png") left no-repeat;
+
+
+}
+
+h2
+{
+        /**name**/
+        font: 12px arial;
+        text-align: left;
+	position: absolute;
+	left: 0px;
+	width: auto;
+	height: auto;
+        color: #ffffff;
+        margin-top: 1px;
+        margin-bottom: 1px;
+        margin-left: 10px;
+        margin-right: 1px:
+	display: block;
+}
+
+h3
+{
+        /**time**/
+        font: 10px arial;
+        text-align: right;
+	position: absolute;
+	right: 0px;
+	width: auto;
+	height: auto;
+        color: #ffffff;
+        margin-top: 1px;
+        margin-bottom: 1px;
+        margin-left: 1px;
+        margin-right: 10px;
+	display: block;
+}
+
+h4
+{
+        /**msg**/
+        font: 12px arial;
+	height: 100%;
+        text-align: left;
+        color: #000000;
+        margin-top: 0px;
+        margin-bottom: 1px;
+        margin-left: 10px;
+        margin-right: 10px;
+
+}
+
+h5      
+{
+        /**userList Name**/
+        font: 13px arial;
+        height: 100%;
+	position: absolute;
+        text-align: center;
+        color: #ffffff;
+        margin-top: 7px;
+        margin-bottom: 0px;
+        margin-left: 10px;
+        margin-right: 10px;
+        
+}       
+
+
+h6
+{
+
+	/**send button **/
+	font: 10px arial;
+	text-align: center;
+	color: #000000;
+	margin-top: 5px;
+        margin-bottom: 1px;
+        margin-left: 4px;
+        margin-right: 2px;
+}
+
+h7
+{
+	font: 30px arial;
+	color: #00ccff;
+}	
+

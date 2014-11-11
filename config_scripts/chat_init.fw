@@ -1,0 +1,110 @@
+#!/bin/sh
+
+#
+#Copyright (c) 2006 Noah M. Shibley  All right reserved.
+
+#This file is part of Glucose.
+
+#    Glucose is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+
+#    Glucose is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+
+#    You should have received a copy of the GNU General Public License
+#    along with Glucose.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+
+#This was partly copied from the IPTables scripts in NoCatSplash
+#Lead developer:
+#Schuyler Erle <schuyler@nocat.net>
+#http://nocat.net/
+
+
+fwd="iptables	    -t filter -A Chat"
+ports="iptables	    -t filter -A Chat_Ports"
+nat="iptables	    -t nat    -A Chat_NAT"
+redirect="iptables  -t nat    -A Chat_Capture"
+mangle="iptables    -t mangle -A Chat"
+GatewayPort=5469
+
+
+# Enable IP forwarding and rp_filter (to kill IP spoof attempts).
+#
+echo "1" > /proc/sys/net/ipv4/ip_forward
+echo "1" > /proc/sys/net/ipv4/conf/all/rp_filter
+
+# Load alllll the kernel modules we need.
+#
+
+for module in ipt_REDIRECT ipt_TOS ipt_mac; do
+    insmod -v $module
+done
+
+#add the modules necessary for traffic control here, for convience.
+for module in cls_fw cls_u32 sch_sfq sch_prio sch_htb sch_ingress; do
+	insmod -v $module
+done
+
+
+
+# Flush all user-defined chains
+#
+iptables -t filter -N Chat 2>/dev/null
+iptables -t filter -F Chat
+iptables -t filter -D FORWARD -j Chat 2>/dev/null
+iptables -t filter -A FORWARD -j Chat
+
+iptables -t filter -N Chat_Ports 2>/dev/null
+iptables -t filter -F Chat_Ports
+iptables -t filter -D Chat -j Chat_Ports 2>/dev/null
+iptables -t filter -A Chat -j Chat_Ports
+
+iptables -t filter -N Chat_Inbound 2>/dev/null
+iptables -t filter -F Chat_Inbound
+iptables -t filter -D Chat -j Chat_Inbound 2>/dev/null
+iptables -t filter -A Chat -j Chat_Inbound
+
+iptables -t nat -N Chat_Capture 2>/dev/null
+iptables -t nat -F Chat_Capture
+iptables -t nat -D PREROUTING -j Chat_Capture 2>/dev/null
+iptables -t nat -A PREROUTING -j Chat_Capture
+
+iptables -t nat -N Chat_NAT 2>/dev/null
+iptables -t nat -F Chat_NAT
+
+#
+# Only nat if we're not routing
+#
+iptables -t nat -D POSTROUTING -j Chat_NAT 2>/dev/null
+iptables -t nat -A POSTROUTING -j Chat_NAT
+
+iptables -t mangle -N Chat 2>/dev/null
+iptables -t mangle -F Chat
+iptables -t mangle -D PREROUTING -j Chat 2>/dev/null
+iptables -t mangle -A PREROUTING -j Chat
+
+# Handle tagged traffic.
+#
+	    # Only forward tagged traffic per class
+	    $fwd -i br0 -s 192.168.1.1/24 -m mark --mark 1 -j ACCEPT
+
+	    # Masquerade permitted connections.
+	    $nat -o vlan1 -s 192.168.1.1/24 -m mark --mark 1 -j MASQUERADE
+
+# Set packets from internal devices to fw mark 4, or 'denied', by default.
+   $mangle -i br0 -j MARK --set-mark 4
+
+for port in 80 443; do
+   $redirect -m mark --mark 4 -p tcp --dport $port  -j REDIRECT --to-port $GatewayPort
+
+	#$redirect -m mark --mark 4 -p tcp --dport $port  -j -j DNAT --to-destination 192.168.1.1:5469
+done
+
+# Filter policy.
+$fwd -j DROP

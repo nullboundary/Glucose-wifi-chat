@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+case "$1" in
+start)
+echo -n "Starting chat server:"
+echo -n  "php chat server" ;
+/etc/server.php 1>/dev/null &
+echo "."
+;;
+stop)
+echo -n "Stopping chat server:"
+echo -n "php chat server" ;
+killall server.php
+echo "."
+;;
+restart)
+echo -n "Restarting chat server:"
+echo -n " php chat server"
+$0 stop
+$0 start
+echo "."
+;;
+*)
+echo "Usage: $0 {start|stop|restart}"
+exit 1
+;;
+esac

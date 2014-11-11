@@ -1,0 +1,86 @@
+/*
+Copyright (c) 2006 Noah M. Shibley  All right reserved.
+
+This file is part of Glucose.
+
+    Glucose is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Glucose is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Glucose.  If not, see <http://www.gnu.org/licenses/>.
+
+*/
+
+body
+{
+        background : #000000;
+}
+
+div#browser
+{
+	position: absolute;
+        top: 600px;
+        left: 50%;
+	color: #663399;
+        font: 15px arial;
+
+
+}
+
+div#infoText
+{
+	position: absolute;
+        top: 500px;
+        left: 100px;
+
+	color: #663399;
+        font: 15px arial;
+
+
+}
+
+div#admin
+{
+	position: absolute;
+	top: 0px;
+	right: 0%;
+	border: solid 3px #663399; 
+	color: #663399;
+	font: 15px arial;
+	background: #ffffff;
+	width: 100px;
+	height: 20px;
+	padding-left: 15px;
+
+}
+
+div#loginBox
+{
+	position: absolute;
+        top: 400px;
+        left: 300px;
+
+
+}
+
+div#logo
+{
+
+	position: absolute;
+        top: 5px;
+        left: 100px;
+
+
+}
+
+A:link {text-decoration: none; color: #663399; }
+A:visited {text-decoration: none; color: #663399; }
+A:active {text-decoration: none;}
+A:hover {text-decoration: underline;}

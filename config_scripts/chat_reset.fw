@@ -1,0 +1,36 @@
+#!/bin/sh
+##
+#
+#Copyright (c) 2006 Noah M. Shibley  All right reserved.
+
+#This file is part of Glucose.
+
+#    Glucose is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+
+#    Glucose is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+
+#    You should have received a copy of the GNU General Public License
+#    along with Glucose.  If not, see <http://www.gnu.org/licenses/>.
+#
+#
+# reset.fw: reset the default firewall rules in case chat_init.fw caused a problem.
+#
+##
+
+# Flush all user-defined chains
+#
+iptables -t filter -D FORWARD -j Chat 2>/dev/null
+
+iptables -t nat -D PREROUTING -j Chat_Capture 2>/dev/null
+
+# Only nat if we're not routing? don't get this one...
+
+iptables -t nat -D POSTROUTING -j Chat_NAT 2>/dev/null
+
+iptables -t mangle -D PREROUTING -j Chat 2>/dev/null
