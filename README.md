@@ -3,7 +3,7 @@ Name    : Glucose wifi chat
 Author  : Noah Shibley, http://socialhardware.net                       
 Date    : 2006                                 
 Version : 0.1                                               
-Notes   : A chat client and server. Administer and control your Wifi like an IRC channel
+Notes   : A chat client and server. Administer your Wifi like an IRC channel
 Dependencies:	Openwrt
 ```
 
